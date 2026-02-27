@@ -17,6 +17,9 @@ PASTA: str = os.getenv('PASTA')
 
 logger.add("logs/file_upload.log", rotation="1 MB")
 
+if not all([AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, BUCKET_NAME, PASTA]):
+    raise ValueError("Missing required environment variables.")
+
 # Boto3 S3 Client
 try:
     s3_client = boto3.client(
